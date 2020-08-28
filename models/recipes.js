@@ -4,11 +4,20 @@ function find() {
   return db("recipes");
 }
 
-function findById(id) {
-  return db("recipes").where("id", id).first();
+function getRecipeList(id) {
+  return db("recipe_instructions as ri").where("id", id)
+  .join("ingredients as i", "i.id", "=", "ri.ingredients_id")
+.select("i.ingredient_name", "ri.measurement");
+}
+
+function findInstructions(id){
+  return db("instructions as i")
+  .where("i.recipe_id", id)
+  .select("i.step_number", "i.steps");
 }
 
 module.exports = {
   find,
-  findById,
+  getRecipeList,
+  findInstructions,
 };

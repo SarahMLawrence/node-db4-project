@@ -21,7 +21,7 @@ router.get("/instructions/:id", async (req, res, next) => {
       });
     }
 
-    res.json(recipe);
+    res.json(instruction);
   } catch (err) {
     next(err);
   }
